@@ -1,4 +1,5 @@
 import 'package:exercise_rest_api/utils/theme.dart';
+import 'package:exercise_rest_api/views/buy_success_screen.dart';
 import 'package:flutter/material.dart';
 
 class DetailProductScreen extends StatefulWidget {
@@ -9,7 +10,6 @@ class DetailProductScreen extends StatefulWidget {
 }
 
 class _DetailProductScreenState extends State<DetailProductScreen> {
-  
   @override
   Widget build(BuildContext context) {
     Widget header() {
@@ -68,8 +68,8 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
             Text(
               "\$ 549",
               style: textStyle.copyWith(
-                  fontWeight: bold,
-                  fontSize: 16
+                fontWeight: bold,
+                fontSize: 16,
               ),
             ),
             const SizedBox(
@@ -171,27 +171,30 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
 
     Widget buyButton() {
       return Container(
-        margin: const EdgeInsets.only(
-          top: 123,
-          left: 20,
-          right: 20,
-          bottom: 36
-        ),
+        margin:
+            const EdgeInsets.only(top: 123, left: 20, right: 20, bottom: 36),
         width: double.infinity,
         height: 50,
         child: TextButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => BuySuccessScreen(),
+              ),
+            );
+          },
           style: TextButton.styleFrom(
             backgroundColor: Colors.blue,
             shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(10)
-            )
+              borderRadius: BorderRadius.circular(10),
+            ),
           ),
           child: Text(
             "Beli",
             style: textStyle.copyWith(
               fontWeight: medium,
-              color: Colors.white
+              color: Colors.white,
             ),
           ),
         ),
@@ -222,7 +225,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
           children: [
             header(),
             body(),
-            buyButton()
+            buyButton(),
           ],
         ),
       ),
