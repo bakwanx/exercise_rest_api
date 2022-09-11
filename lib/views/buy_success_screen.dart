@@ -45,7 +45,7 @@ class BuySuccessScreen extends StatelessWidget {
                   ),
                 ),
                 child: Text(
-                  "Beli",
+                  "Kembali",
                   style: textStyle.copyWith(
                     fontWeight: medium,
                     color: Colors.white,

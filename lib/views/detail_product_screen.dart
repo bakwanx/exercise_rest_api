@@ -1,9 +1,11 @@
+import 'package:exercise_rest_api/models/product_model.dart';
 import 'package:exercise_rest_api/utils/theme.dart';
 import 'package:exercise_rest_api/views/buy_success_screen.dart';
 import 'package:flutter/material.dart';
 
 class DetailProductScreen extends StatefulWidget {
-  const DetailProductScreen({Key? key}) : super(key: key);
+  final ProductModel productModel;
+  const DetailProductScreen(this.productModel, {Key? key}) : super(key: key);
 
   @override
   State<DetailProductScreen> createState() => _DetailProductScreenState();
@@ -13,8 +15,8 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
   @override
   Widget build(BuildContext context) {
     Widget header() {
-      return Image.asset(
-        "assets/product1.png",
+      return Image.network(
+        widget.productModel.images![0],
         height: 250,
         width: double.infinity,
         fit: BoxFit.cover,
@@ -33,7 +35,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
           children: [
             //NOTE: TITLE, RATING, PRICE
             Text(
-              "Iphone 9",
+              widget.productModel.title.toString(),
               style: textStyle.copyWith(
                 fontWeight: medium,
                 fontSize: 20,
@@ -54,7 +56,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
                   width: 4,
                 ),
                 Text(
-                  "4.69",
+                  widget.productModel.rating.toString(),
                   style: textStyle.copyWith(
                     fontSize: 12,
                     color: Colors.grey,
@@ -66,7 +68,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
               height: 16,
             ),
             Text(
-              "\$ 549",
+              "\$ ${widget.productModel.price}",
               style: textStyle.copyWith(
                 fontWeight: bold,
                 fontSize: 16,
@@ -95,7 +97,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
               height: 10,
             ),
             Text(
-              "Apple",
+              widget.productModel.brand.toString(),
               style: textStyle.copyWith(
                 fontSize: 12,
                 color: Colors.grey,
@@ -116,7 +118,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
               height: 10,
             ),
             Text(
-              "Smartphone",
+              widget.productModel.category.toString(),
               style: textStyle.copyWith(
                 fontSize: 12,
                 color: Colors.grey,
@@ -137,7 +139,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
               height: 10,
             ),
             Text(
-              "34 Item",
+              "${widget.productModel.stock} Item",
               style: textStyle.copyWith(
                 fontSize: 12,
                 color: Colors.grey,
@@ -148,7 +150,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
               height: 16,
             ),
             Text(
-              "Deskripsi",
+              "Description",
               style: textStyle.copyWith(
                 fontWeight: bold,
                 fontSize: 12,
@@ -158,7 +160,7 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
               height: 10,
             ),
             Text(
-              "SIM-Free, Model A19211 6.5-inch Super Retina HD display with OLED technology A12 Bionic chip with ...",
+              widget.productModel.description.toString(),
               style: textStyle.copyWith(
                 fontSize: 12,
                 color: Colors.grey,
@@ -215,9 +217,14 @@ class _DetailProductScreenState extends State<DetailProductScreen> {
             color: Colors.black,
           ),
         ),
-        leading: const Icon(
-          Icons.arrow_back,
-          color: Colors.black,
+        leading: IconButton(
+          onPressed: () {
+            Navigator.of(context).pop();
+          },
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.black,
+          )
         ),
       ),
       body: SingleChildScrollView(
